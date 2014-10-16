@@ -1,0 +1,124 @@
+*{
+  font-family: 'Roboto';
+}
+
+::-webkit-input-placeholder {
+   color: @cream;
+}
+
+#sb {
+display: none;
+position: absolute;
+left: 90px;
+right: 0;
+top: 0;
+bottom: 0;
+z-index: 300;
+background: url(https://play.spotify.edgekey.net/client/5fee4e3/images/shimify.gif);
+}
+
+#searchForm > .form-group {
+  position: relative;
+}
+#searchResults {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+#searchResults > li {
+  border-radius: 0;
+}
+#searchResults > li:nth-child(even) {
+  background-color: #615e60 !important;
+}
+li.media {
+  margin-bottom: -1px;
+  background-color: @slate-light;
+  border: 1px solid @shale;
+  padding: 10px;
+  margin: -1px;
+}
+.media-object {
+  height: 32px;
+  width: 32px;
+}
+.media-heading {
+   margin: 0 0 15px;
+   position: relative;
+   top: 8px;
+}
+
+.form-control {
+  background: @slate-light !important;
+  color: @cream !important;
+  width: 100%;
+  padding: 10px;
+  margin: 4px 0;
+  border: 1px solid @discs !important;
+  height: 40px;
+
+  &:active {
+    outline: 0 !important;
+  }
+
+}
+
+.jumbotron {
+  background-color: @slate-light;
+}
+
+.list-group-item  {
+  background-color: transparent !important;
+}
+
+.badge-success {
+  background: @brand-success;
+}
+.badge-danger {
+  background: @brand-danger;
+}
+.list-group-item {
+  padding: 20px 15px;
+  border: 1px solid @slate-light;
+}
+.form-control, .btn, .badge {
+  border-radius: 0;
+}
+
+
+.track-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.track-list-item {
+  width: 100%;
+  border: 1px solid #615e60;
+  margin-top: -1px;
+
+  .btn {
+    height: 34px;
+    width: 38px;
+    outline: 0 !important;
+  }
+
+  .track-name {
+    padding: 0 10px;
+  }
+
+  .btn-success:hover {
+    background-color: @brand-success;
+    border: 1px solid @brand-success;
+  }
+
+  .btn-danger:hover {
+    background-color: @brand-danger;
+    border: 1px solid @brand-danger;
+  }
+
+}
+
+.users {
+  padding: 8px;
+  cursor: pointer;
+}
