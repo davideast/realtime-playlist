@@ -1,3 +1,3 @@
-# Realtime Reddit
+# Realtime Playist
 
 React + Firebase.
