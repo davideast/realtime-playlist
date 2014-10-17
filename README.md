@@ -1,3 +1,3 @@
-# Realtime Playist
+# Realtime Playlist
 
 React + Firebase.
