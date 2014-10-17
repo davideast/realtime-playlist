@@ -27,6 +27,11 @@ var Feed = React.createClass({
     });
   },
 
+  logout: function() {
+    var ref = this.getRef();
+    ref.unauth();
+  },
+
   updateVote: function(updateItem) {
     var itemRef = this.getItemRef(updateItem.id);
     var countRef = itemRef.child('votes');
@@ -38,10 +43,13 @@ var Feed = React.createClass({
     return {
       items: [],
       searchResults: [],
-      activeTrack: null,
+      activeTrack: {
+        name: 'Select a track',
+        artist: '',
+        previewUrl: ''
+      },
       play: false,
       user: null,
-      searchText: ''
     };
   },
 
@@ -103,7 +111,6 @@ var Feed = React.createClass({
       this.setState({
         user: authData
       });
-      console.log(authData);
     }.bind(this));
   },
 
@@ -111,9 +118,11 @@ var Feed = React.createClass({
     this.loadFeed();
     this.onAuth();
     this.spotifySearch = new SpotifySearch();
+    this.currentSong = null;
   },
 
   onVote: function (updateItem) {
+    if(!this.state.user) { return; }
     this.updateVote(updateItem);
   },
 
@@ -121,8 +130,7 @@ var Feed = React.createClass({
 
     if(searchString === contstants.CLEAR) {
       this.setState({
-        searchResults: [],
-        searchText: ''
+        searchResults: []
       });
       return;
     }
@@ -136,13 +144,41 @@ var Feed = React.createClass({
     }.bind(this));
   },
 
-  onPickSong: function(previewUrl, willPlay) {
+  onPlay: function(activeTrack) {
+
+    if(this.currentSong) {
+      this.currentSong.pause();
+    }
+
+    this.currentSong = new Audio(activeTrack.previewUrl);
+
+    // change state when track ends
+    this.currentSong.addEventListener('ended', function() {
+      this.props.onPickSong(activeTrack.previewUrl, false);
+    }.bind(this));
+
+    this.currentSong.play();
 
     this.setState({
-      activeTrack: previewUrl,
-      play: willPlay
+      activeTrack: activeTrack,
+      play: true
     });
 
+  },
+
+  onPause: function() {
+    this.currentSong.pause();
+    this.setState({
+      play: false
+    });
+  },
+
+  playCurrent: function() {
+    this.onPlay(this.state.activeTrack);
+  },
+
+  pauseCurrent: function() {
+    this.onPause();
   },
 
   onNewItem: function(newItem) {
@@ -158,7 +194,6 @@ var Feed = React.createClass({
   },
 
   onEgg: function(items) {
-    console.log(items);
     this.setState({
       searchResults: items
     });
@@ -166,25 +201,43 @@ var Feed = React.createClass({
 
   render: function() {
 
-    var loginDisplay = {
-      display: this.state.user ? 'none': 'block'
-    };
+    var loginOrOut = this.state.user ? 'Logout for what' : 'Login for what';
+    var loginOrOutCallback = this.state.user ? this.logout : this.login;
+
+    var playPauseClass = this.state.play ? 'glyphicon glyphicon-pause' : 'glyphicon glyphicon-play';
+    var playPauseCallback = this.state.play ? this.pauseCurrent : this.playCurrent;
 
     return (
       <div>
 
-        <div className="container" style={loginDisplay}>
-          <button className="btn btn-info btn-block" onClick={this.login}>Login for what</button>
+        <header>
+          <h4 className="logo">Realtime Playlist</h4>
+          <h5 className="playlist-title">Turn down for what</h5>
+          <button className="btn btn-info pull-right" onClick={loginOrOutCallback}>{loginOrOut}</button>
+        </header>
 
-          <br />
-          <br />
-        </div>
+        <section id="player">
+
+          <div className="player-wrap">
+
+            <div onClick={playPauseCallback} className="control">
+              <span className={playPauseClass}></span>
+            </div>
+
+            <div className="currentTrack">
+              <h4 className="track-song">{this.state.activeTrack.name}</h4>
+              <h5 className="track-artist">{this.state.activeTrack.artist}</h5>
+            </div>
+          </div>
+
+        </section>
 
         <FeedForm onSearch={this.onSearch}
                   searchResults={this.state.searchResults}
                   activeTrack={this.state.activeTrack}
                   play={this.state.play}
-                  onPickSong={this.onPickSong}
+                  onPlay={this.onPlay}
+                  onPause={this.onPause}
                   onNewItem={this.onNewItem}
                   searchText={this.state.searchText}
                   onEgg={this.onEgg} />
@@ -193,7 +246,11 @@ var Feed = React.createClass({
         <br />
 
         <FeedList items={this.state.items}
-                  onVote={this.onVote} />
+                  onVote={this.onVote}
+                  onPlay={this.onPlay}
+                  onPause={this.onPause}
+                  play={this.state.play}
+                  activeTrack={this.state.activeTrack} />
       </div>
     );
   }

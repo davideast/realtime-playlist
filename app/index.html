@@ -5,12 +5,72 @@
       <title>Realtime Playlist</title>
       <link href="//fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet" type="text/css" />
       <link rel="stylesheet" href="/dist/css/main.css" />
+      <style>
+        * {
+          font-family: 'Roboto', Arial;
+          box-sizing: border-box;
+        }
+        html, body {
+          width: 100%;
+          height: 100%;
+          background-color: #F1F2F4;
+        }
+        p, h1, h2, h3, h4, h5, ul, ol {
+          padding: 0;
+          margin: 0;
+        }
+
+        ul {
+          list-style-type: none;
+        }
+
+        header {
+          background-color: #FFF;
+          padding: 20px;
+          border-bottom: 1px solid #DDDEE3;
+        }
+        header h4, header h5 {
+          display: inline-block;
+        }
+        header .logo {
+          border-right: 1px solid #DDDEE3;
+          padding-right: 10px;
+        }
+        header .playlist-title {
+          padding-left: 10px;
+        }
+
+        #main {
+          height: 100%;
+          border-top: 1px solid #D2D5D9;
+        }
+
+        #player {
+          background-color: #3968B5;
+          color: #fff;
+          height: 100px;
+        }
+        .control {
+          display: inline-block;
+          font-size: 32px;
+          position: absolute;
+          left: 100px;
+        }
+        .player-wrap {
+          position: relative;
+          top: 30px;
+        }
+        .currentTrack {
+          position: relative;
+          left: 200px;
+          display: inline-block;
+        }
+        .currentTrack .track-song {
+          padding-bottom: 10px;
+        }
+      </style>
    </head>
    <body>
-
-     <div class="jumbotron text-center">
-        <h2>Realtime Playlist</h2>
-     </div>
 
      <div id="app">
 

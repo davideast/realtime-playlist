@@ -7,7 +7,6 @@ var FeedForm = React.createClass({
 
   componentDidMount: function() {
     this.timer = 0;
-    this.currentSong = null;
   },
 
   matchesAnyEggs: function(text) {
@@ -42,7 +41,7 @@ var FeedForm = React.createClass({
   searchTracks: function(e) {
     var search = this.refs.title.getDOMNode().value;
     var possibleEgg = this.matchesAnyEggs(search);
-    console.log(possibleEgg);
+
     if(possibleEgg) {
       this.props.onEgg(possibleEgg);
       return;
@@ -65,28 +64,6 @@ var FeedForm = React.createClass({
     }.bind(this), 200)
   },
 
-  onPause: function(previewUrl) {
-    this.props.onPickSong(previewUrl, false);
-    this.currentSong.pause();
-  },
-
-  pickSong: function(previewUrl) {
-    this.props.onPickSong(previewUrl, true);
-
-    if(this.currentSong) {
-      this.currentSong.pause();
-    }
-
-    this.currentSong = new Audio(previewUrl);
-
-    // change state when track ends
-    this.currentSong.addEventListener('ended', function() {
-      this.props.onPickSong(previewUrl, false);
-    }.bind(this));
-
-    this.currentSong.play();
-  },
-
   getTrackFromEvent: function(e) {
     var index = parseInt(e.target.parentNode.attributes[1].value, 10);
     return this.props.searchResults[index];
@@ -101,8 +78,8 @@ var FeedForm = React.createClass({
                         activeTrack={this.props.activeTrack}
                         play={this.props.play}
                         index={index}
-                        onPlay={this.pickSong}
-                        onPause={this.onPause} />
+                        onPlay={this.props.onPlay}
+                        onPause={this.props.onPause} />
 
     }.bind(this));
 

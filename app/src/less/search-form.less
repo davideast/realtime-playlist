@@ -2,39 +2,28 @@
   font-family: 'Roboto';
 }
 
-::-webkit-input-placeholder {
-   color: @cream;
-}
-
-#sb {
-display: none;
-position: absolute;
-left: 90px;
-right: 0;
-top: 0;
-bottom: 0;
-z-index: 300;
-background: url(https://play.spotify.edgekey.net/client/5fee4e3/images/shimify.gif);
-}
-
 #searchForm > .form-group {
   position: relative;
 }
 #searchResults {
   position: absolute;
-  width: 100%;
+  width: 90%;
   z-index: 1;
+  top: 39px;
+  left: 1px;
 }
 #searchResults > li {
   border-radius: 0;
+  border-radius: 4px;
 }
 #searchResults > li:nth-child(even) {
-  background-color: #615e60 !important;
+  background-color: #F1F2F4 !important;
 }
+
 li.media {
   margin-bottom: -1px;
-  background-color: @slate-light;
-  border: 1px solid @shale;
+  background-color: #fff;
+  border: 1px solid #d8d9dd;
   padding: 10px;
   margin: -1px;
 }
@@ -49,26 +38,15 @@ li.media {
 }
 
 .form-control {
-  background: @slate-light !important;
-  color: @cream !important;
   width: 100%;
   padding: 10px;
   margin: 4px 0;
-  border: 1px solid @discs !important;
   height: 40px;
 
   &:active {
     outline: 0 !important;
   }
 
-}
-
-.jumbotron {
-  background-color: @slate-light;
-}
-
-.list-group-item  {
-  background-color: transparent !important;
 }
 
 .badge-success {
@@ -81,41 +59,19 @@ li.media {
   padding: 20px 15px;
   border: 1px solid @slate-light;
 }
-.form-control, .btn, .badge {
-  border-radius: 0;
+
+.badge {
+  position: relative;
+  top: 1px;
+  margin-right: 4px;
 }
 
+.list-group-item {
+  border: 1px solid #d8d9dd;
 
-.track-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-.track-list-item {
-  width: 100%;
-  border: 1px solid #615e60;
-  margin-top: -1px;
-
-  .btn {
-    height: 34px;
-    width: 38px;
-    outline: 0 !important;
+  &:nth-child(even) {
+    background-color: #F1F2F4;
   }
-
-  .track-name {
-    padding: 0 10px;
-  }
-
-  .btn-success:hover {
-    background-color: @brand-success;
-    border: 1px solid @brand-success;
-  }
-
-  .btn-danger:hover {
-    background-color: @brand-danger;
-    border: 1px solid @brand-danger;
-  }
-
 }
 
 .users {

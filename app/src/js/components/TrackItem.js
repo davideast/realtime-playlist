@@ -19,10 +19,9 @@ var TrackItem = React.createClass({
   },
 
   makeTrackItem: function(track) {
-    console.log('track', track);
     var trackItem = {};
     trackItem.artist = track.artists[0].name;
-    trackItem.isActive = this.props.activeTrack === track.preview_url;
+    trackItem.isActive = this.props.activeTrack.id === track.id;
     trackItem.isPlaying = this.props.play && trackItem.isActive;
     trackItem.classString = trackItem.isPlaying ? 'pull-right btn btn-danger' : 'pull-right btn btn-primary';
     trackItem.audioText = trackItem.isPlaying ? 'Pause' : 'Play';
@@ -37,12 +36,12 @@ var TrackItem = React.createClass({
 
   play: function(e) {
     e.preventDefault();
-    this.props.onPlay(this.props.track.preview_url);
+    this.props.onPlay(this.trackItem);
   },
 
   pause: function(e) {
     e.preventDefault();
-    this.props.onPause(this.props.track.preview_url);
+    this.props.onPause(this.trackItem);
   },
 
   render: function() {
