@@ -42,7 +42,7 @@ var FeedItem = React.createClass({
 
     return (
 
-      <li className="list-group-item">
+      <li key={track.id} className="list-group-item">
 
          <span className="pull-right">
            <button className="btn btn-default" onClick={this.voteUp}>&uarr;</button>

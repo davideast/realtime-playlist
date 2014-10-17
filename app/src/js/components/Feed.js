@@ -153,9 +153,7 @@ var Feed = React.createClass({
     this.currentSong = new Audio(activeTrack.previewUrl);
 
     // change state when track ends
-    this.currentSong.addEventListener('ended', function() {
-      this.props.onPickSong(activeTrack.previewUrl, false);
-    }.bind(this));
+    this.currentSong.addEventListener('ended', this.props.onPause);
 
     this.currentSong.play();
 
@@ -231,6 +229,9 @@ var Feed = React.createClass({
           </div>
 
         </section>
+
+        <br />
+        <br />
 
         <FeedForm onSearch={this.onSearch}
                   searchResults={this.state.searchResults}
