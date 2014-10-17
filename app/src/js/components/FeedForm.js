@@ -10,8 +10,43 @@ var FeedForm = React.createClass({
     this.currentSong = null;
   },
 
+  matchesAnyEggs: function(text) {
+    var EGGS = {
+
+      'Eye of the Tiger':
+        [
+          {
+            id: "1",
+            artists: [{name: 'Andrew'}],
+            name: "It's already on the playlist.",
+            album: {
+              images:[{ url: ''},{ url: ''},{ url: ''}]
+            }
+          }
+        ]
+
+    };
+
+    var eggValue = null;
+
+    Object.keys(EGGS).forEach(function(egg) {
+      if(egg.toLowerCase() === text.toLowerCase()) {
+        eggValue = EGGS[egg];
+        return;
+      }
+    });
+
+    return eggValue;
+  },
+
   searchTracks: function(e) {
     var search = this.refs.title.getDOMNode().value;
+    var possibleEgg = this.matchesAnyEggs(search);
+    console.log(possibleEgg);
+    if(possibleEgg) {
+      this.props.onEgg(possibleEgg);
+      return;
+    }
 
     if(search === '') {
       this.props.onSearch(contstants.CLEAR);

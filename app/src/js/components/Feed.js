@@ -12,7 +12,7 @@ var Feed = React.createClass({
 
   // helper method to create Firebase refs to the feed
   getRef: function() {
-    return new Firebase('https://webapi.firebaseio.com/playlist/');
+    return new Firebase('https://realtime-playlist.firebaseio.com/playlist/');
   },
 
   // helper method to create Feed Item refs
@@ -157,6 +157,13 @@ var Feed = React.createClass({
     this.onSearch(contstants.CLEAR);
   },
 
+  onEgg: function(items) {
+    console.log(items);
+    this.setState({
+      searchResults: items
+    });
+  },
+
   render: function() {
 
     var loginDisplay = {
@@ -179,7 +186,8 @@ var Feed = React.createClass({
                   play={this.state.play}
                   onPickSong={this.onPickSong}
                   onNewItem={this.onNewItem}
-                  searchText={this.state.searchText} />
+                  searchText={this.state.searchText}
+                  onEgg={this.onEgg} />
 
         <br />
         <br />

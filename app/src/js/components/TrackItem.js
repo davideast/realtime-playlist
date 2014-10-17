@@ -19,6 +19,7 @@ var TrackItem = React.createClass({
   },
 
   makeTrackItem: function(track) {
+    console.log('track', track);
     var trackItem = {};
     trackItem.artist = track.artists[0].name;
     trackItem.isActive = this.props.activeTrack === track.preview_url;
