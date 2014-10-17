@@ -1,0 +1,16 @@
+{
+  "name": "realtime-playlist-process",
+  "version": "0.0.0",
+  "description": "",
+  "main": "playlist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "request": "^2.45.0",
+    "firebase": "^1.0.21",
+    "spotify-web": "^1.2.0"
+  }
+}

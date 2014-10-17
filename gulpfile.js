@@ -4,6 +4,7 @@ var gulp = require('gulp'),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
+    nodemon = require('gulp-nodemon'),
     port = process.env.port || 4000;
 
 // browserify and transform JSX
@@ -61,6 +62,21 @@ gulp.task('watch', function() {
     gulp.watch('app/index.html', ['html']);
     gulp.watch('app/src/less/**/*.less', ['less', 'html']);
     gulp.watch('app/src/js/**/*.js', ['browserify']);
+});
+
+// run auth server
+gulp.task('auth', function() {
+  nodemon({
+    script: './auth/auth.js',
+    ext: 'html js'
+  });
+});
+
+gulp.task('process', function() {
+  nodemon({
+    script: './process/playlist.js',
+    ext: 'js'
+  });
 });
 
 gulp.task('default', ['browserify', 'less', 'fonts']);
